@@ -2,8 +2,12 @@
   <div class="max-w-4xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Checkout</h2>
-      <p class="text-gray-600 dark:text-gray-300">Enter your details to complete your order</p>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        Checkout
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300">
+        Enter your details to complete your order
+      </p>
     </div>
 
     <form @submit.prevent="handleSubmit" class="grid lg:grid-cols-3 gap-8">
@@ -14,7 +18,7 @@
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
             Contact Information
           </h3>
-
+          
           <div class="grid md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -28,7 +32,7 @@
                 placeholder="Enter your full name"
               />
             </div>
-
+            
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email Address *
@@ -41,7 +45,7 @@
                 placeholder="Enter your email"
               />
             </div>
-
+            
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Phone Number *
@@ -59,8 +63,10 @@
 
         <!-- Delivery Address -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Delivery Address</h3>
-
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+            Delivery Address
+          </h3>
+          
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -74,7 +80,7 @@
                 placeholder="123 Main Street"
               />
             </div>
-
+            
             <div class="grid md:grid-cols-3 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -88,7 +94,7 @@
                   placeholder="City"
                 />
               </div>
-
+              
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   State *
@@ -105,7 +111,7 @@
                   <option value="FL">Florida</option>
                 </select>
               </div>
-
+              
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   ZIP Code *
@@ -124,8 +130,10 @@
 
         <!-- Payment Method -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Payment Method</h3>
-
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+            Payment Method
+          </h3>
+          
           <div class="space-y-4">
             <div class="flex items-center space-x-3">
               <input
@@ -140,7 +148,7 @@
                 <span>Credit/Debit Card</span>
               </label>
             </div>
-
+            
             <div class="flex items-center space-x-3">
               <input
                 id="cash"
@@ -169,7 +177,7 @@
                 class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
             </div>
-
+            
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -182,7 +190,7 @@
                   class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               </div>
-
+              
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   CVV *
@@ -213,8 +221,8 @@ import { Icon } from '@iconify/vue'
 import CheckoutSummary from '../checkout/CheckoutSummary.vue'
 import type { Order, CustomerInfo } from '../../types'
 
-defineEmits<{
-  back: []
+const emit = defineEmits<{
+  'back': []
   'order-placed': [order: Order]
 }>()
 
@@ -229,7 +237,7 @@ const form = reactive({
   paymentMethod: 'card',
   cardNumber: '',
   expiryDate: '',
-  cvv: '',
+  cvv: ''
 })
 
 const handleSubmit = () => {
@@ -243,25 +251,25 @@ const handleSubmit = () => {
     name: form.name,
     email: form.email,
     phone: form.phone,
-    address: `${form.address}, ${form.city}, ${form.state} ${form.zipCode}`,
+    address: `${form.address}, ${form.city}, ${form.state} ${form.zipCode}`
   }
 
   // Create order
   const order: Order = {
     id: `order-${Date.now()}`,
-    pizzas: [], // This would come from the cart store
-    totalAmount: 0, // This would be calculated
+    pizzas: [],
+    totalAmount: 0,
     customerInfo,
     status: 'pending',
-    createdAt: new Date(),
+    createdAt: new Date()
   }
 
-  $emit('order-placed', order)
+  emit('order-placed', order)
 }
 
 const isFormValid = () => {
   const requiredFields = ['name', 'email', 'phone', 'address', 'city', 'state', 'zipCode']
-
+  
   for (const field of requiredFields) {
     if (!form[field as keyof typeof form]) {
       return false

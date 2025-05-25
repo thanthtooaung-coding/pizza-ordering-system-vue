@@ -3,7 +3,9 @@
     <div class="flex items-center justify-between">
       <div>
         <h2 class="text-2xl font-bold tracking-tight">Orders</h2>
-        <p class="text-muted-foreground">Manage and track all your orders here.</p>
+        <p class="text-muted-foreground">
+          Manage and track all your orders here.
+        </p>
       </div>
       <button
         @click="$emit('create-order')"
@@ -14,7 +16,10 @@
       </button>
     </div>
 
-    <OrderFilters v-model:search="searchQuery" v-model:status="selectedStatus" />
+    <OrderFilters
+      v-model:search="searchQuery"
+      v-model:status="selectedStatus"
+    />
 
     <OrdersTable
       :orders="paginatedOrders"
@@ -63,26 +68,31 @@ const filteredOrders = computed(() => {
 
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(
-      (order) =>
-        order.id.toString().includes(query) ||
-        order.customer.name.toLowerCase().includes(query) ||
-        order.customer.email.toLowerCase().includes(query),
+    filtered = filtered.filter(order =>
+      order.id.toString().includes(query) ||
+      order.customer.name.toLowerCase().includes(query) ||
+      order.customer.email.toLowerCase().includes(query)
     )
   }
 
   if (selectedStatus.value) {
-    filtered = filtered.filter((order) => order.status === selectedStatus.value)
+    filtered = filtered.filter(order => order.status === selectedStatus.value)
   }
 
   // Sorting
   filtered.sort((a, b) => {
-    let aValue: any = a[sortColumn.value as keyof Order]
-    let bValue: any = b[sortColumn.value as keyof Order]
-
+    let aValue: any
+    let bValue: any
+    
     if (sortColumn.value === 'customer') {
-      aValue = a.customer.name
-      bValue = b.customer.name
+      aValue = a.customer?.name || a.customerInfo?.name || ''
+      bValue = b.customer?.name || b.customerInfo?.name || ''
+    } else if (sortColumn.value === 'total') {
+      aValue = a.total || a.totalAmount || 0
+      bValue = b.total || b.totalAmount || 0
+    } else {
+      aValue = a[sortColumn.value as keyof Order]
+      bValue = b[sortColumn.value as keyof Order]
     }
 
     if (typeof aValue === 'string') {

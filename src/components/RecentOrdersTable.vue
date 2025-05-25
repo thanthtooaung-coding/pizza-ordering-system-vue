@@ -2,7 +2,9 @@
   <div class="rounded-lg border bg-card">
     <div class="p-6">
       <h3 class="text-lg font-medium">Recent Orders</h3>
-      <p class="text-sm text-muted-foreground">You have {{ orders.length }} orders this week.</p>
+      <p class="text-sm text-muted-foreground">
+        You have {{ orders.length }} orders this week.
+      </p>
     </div>
     <div class="border-t">
       <div class="overflow-x-auto">
@@ -35,15 +37,15 @@
               </td>
               <td class="p-4 align-middle">
                 <div>
-                  <div class="font-medium">{{ order.customer.name }}</div>
-                  <div class="text-sm text-muted-foreground">{{ order.customer.email }}</div>
+                  <div class="font-medium">{{ order.customer?.name || order.customerInfo?.name || 'N/A' }}</div>
+                  <div class="text-sm text-muted-foreground">{{ order.customer?.email || order.customerInfo?.email || 'N/A' }}</div>
                 </div>
               </td>
               <td class="p-4 align-middle">
                 <StatusBadge :status="order.status" />
               </td>
               <td class="p-4 align-middle">
-                <div class="font-medium">${{ order.total.toFixed(2) }}</div>
+                <div class="font-medium">${{ (order.total || order.totalAmount || 0).toFixed(2) }}</div>
               </td>
             </tr>
           </tbody>

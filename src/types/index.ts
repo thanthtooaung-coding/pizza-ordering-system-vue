@@ -27,9 +27,11 @@ export interface Pizza {
 }
 
 export interface Order {
+  customer?: any
+  total?: number
   id: string
   pizzas: Pizza[]
-  totalAmount: number
+  totalAmount?: number
   customerInfo: CustomerInfo
   status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'delivered'
   createdAt: Date

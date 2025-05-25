@@ -9,12 +9,19 @@
         <h3 class="text-lg font-medium">
           {{ editingOrder ? 'Edit Order' : 'Create New Order' }}
         </h3>
-        <button @click="$emit('close')" class="rounded-md p-2 hover:bg-accent">
+        <button
+          @click="$emit('close')"
+          class="rounded-md p-2 hover:bg-accent"
+        >
           <Icon icon="radix-icons:cross-2" class="h-4 w-4" />
         </button>
       </div>
 
-      <OrderForm :initial-data="initialFormData" @submit="handleSubmit" @cancel="$emit('close')" />
+      <OrderForm
+        :initial-data="initialFormData"
+        @submit="handleSubmit"
+        @cancel="$emit('close')"
+      />
     </div>
   </div>
 </template>
@@ -32,7 +39,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-defineEmits<{
+const emit = defineEmits<{
   close: []
   save: [orderData: OrderFormType]
 }>()
@@ -40,25 +47,23 @@ defineEmits<{
 const initialFormData = computed(() => {
   if (props.editingOrder) {
     return {
-      customerName: props.editingOrder.customer.name,
-      customerEmail: props.editingOrder.customer.email,
-      total: props.editingOrder.total,
-      status: props.editingOrder.status,
+      customerName: props.editingOrder.customer?.name || props.editingOrder.customerInfo?.name || '',
+      customerEmail: props.editingOrder.customer?.email || props.editingOrder.customerInfo?.email || '',
+      total: props.editingOrder.total || props.editingOrder.totalAmount || 0,
+      status: (['pending', 'processing', 'shipped', 'delivered', 'cancelled'].includes(props.editingOrder.status) 
+        ? props.editingOrder.status 
+        : 'pending') as 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
     }
   }
   return {
     customerName: '',
     customerEmail: '',
     total: 0,
-    status: 'pending' as const,
+    status: 'pending' as const
   }
 })
 
 const handleSubmit = (formData: OrderFormType) => {
-  $emit('save', formData)
-}
-
-function $emit(arg0: string, formData: OrderFormType) {
-  throw new Error('Function not implemented.')
+  emit('save', formData)
 }
 </script>

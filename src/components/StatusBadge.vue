@@ -2,7 +2,7 @@
   <span
     :class="[
       'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
-      statusColors[status],
+      statusColors[status]
     ]"
   >
     {{ status }}
@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 interface Props {
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'confirmed' | 'preparing' | 'ready'
 }
 
 defineProps<Props>()
@@ -22,5 +22,8 @@ const statusColors = {
   shipped: 'bg-purple-100 text-purple-800',
   delivered: 'bg-green-100 text-green-800',
   cancelled: 'bg-red-100 text-red-800',
+  confirmed: 'bg-blue-100 text-blue-800',
+  preparing: 'bg-orange-100 text-orange-800',
+  ready: 'bg-green-100 text-green-800'
 }
 </script>

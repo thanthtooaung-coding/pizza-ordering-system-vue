@@ -10,12 +10,16 @@
               @click="$emit('sort', column.key)"
               :class="[
                 'h-12 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer hover:bg-muted',
-                column.sortable && 'select-none',
+                column.sortable && 'select-none'
               ]"
             >
               <div class="flex items-center space-x-2">
                 <span>{{ column.label }}</span>
-                <Icon v-if="column.sortable" icon="radix-icons:chevron-up" class="h-4 w-4" />
+                <Icon
+                  v-if="column.sortable"
+                  icon="radix-icons:chevron-up"
+                  class="h-4 w-4"
+                />
               </div>
             </th>
             <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
@@ -34,15 +38,15 @@
             </td>
             <td class="p-4 align-middle">
               <div>
-                <div class="font-medium">{{ order.customer.name }}</div>
-                <div class="text-sm text-muted-foreground">{{ order.customer.email }}</div>
+                <div class="font-medium">{{ order.customer?.name || order.customerInfo?.name || 'N/A' }}</div>
+                <div class="text-sm text-muted-foreground">{{ order.customer?.email || order.customerInfo?.email || 'N/A' }}</div>
               </div>
             </td>
             <td class="p-4 align-middle">
               <StatusBadge :status="order.status" />
             </td>
             <td class="p-4 align-middle">
-              <div class="font-medium">${{ order.total.toFixed(2) }}</div>
+              <div class="font-medium">${{ (order.total || order.totalAmount || 0).toFixed(2) }}</div>
             </td>
             <td class="p-4 align-middle">
               <div class="text-sm text-muted-foreground">
@@ -66,7 +70,7 @@
                   <Icon icon="radix-icons:pencil-1" class="h-4 w-4" />
                 </button>
                 <button
-                  @click="$emit('delete-order', order.id)"
+                  @click="$emit('delete-order', typeof order.id === 'string' ? parseInt(order.id.replace(/\D/g, '')) || 0 : order.id)"
                   class="rounded-md p-2 hover:bg-accent text-destructive"
                   title="Delete Order"
                 >
@@ -78,7 +82,7 @@
         </tbody>
       </table>
     </div>
-
+    
     <TablePagination
       :current-page="currentPage"
       :total-pages="totalPages"
@@ -108,7 +112,7 @@ defineEmits<{
   'view-order': [order: Order]
   'edit-order': [order: Order]
   'delete-order': [orderId: number]
-  sort: [column: string]
+  'sort': [column: string]
   'page-change': [page: number]
 }>()
 
@@ -117,14 +121,14 @@ const columns = [
   { key: 'customer', label: 'Customer', sortable: true },
   { key: 'status', label: 'Status', sortable: true },
   { key: 'total', label: 'Total', sortable: true },
-  { key: 'createdAt', label: 'Date', sortable: true },
+  { key: 'createdAt', label: 'Date', sortable: true }
 ]
 
 const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric',
+    day: 'numeric'
   }).format(date)
 }
 </script>
