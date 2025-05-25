@@ -28,7 +28,7 @@
                 v-model="form.name"
                 type="text"
                 required
-                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="Enter your full name"
               />
             </div>
@@ -41,7 +41,7 @@
                 v-model="form.email"
                 type="email"
                 required
-                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="Enter your email"
               />
             </div>
@@ -54,7 +54,7 @@
                 v-model="form.phone"
                 type="tel"
                 required
-                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="(555) 123-4567"
               />
             </div>
@@ -76,7 +76,7 @@
                 v-model="form.address"
                 type="text"
                 required
-                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="123 Main Street"
               />
             </div>
@@ -90,7 +90,7 @@
                   v-model="form.city"
                   type="text"
                   required
-                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   placeholder="City"
                 />
               </div>
@@ -102,9 +102,9 @@
                 <select
                   v-model="form.state"
                   required
-                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 >
-                  <option value="">Select State</option>
+                  <option value="" class="text-gray-500">Select State</option>
                   <option value="CA">California</option>
                   <option value="NY">New York</option>
                   <option value="TX">Texas</option>
@@ -120,7 +120,7 @@
                   v-model="form.zipCode"
                   type="text"
                   required
-                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   placeholder="12345"
                 />
               </div>
@@ -141,10 +141,10 @@
                 v-model="form.paymentMethod"
                 type="radio"
                 value="card"
-                class="w-4 h-4 text-orange-500 focus:ring-orange-500"
+                class="w-4 h-4 text-orange-500 focus:ring-orange-500 border-gray-300 dark:border-gray-600"
               />
-              <label for="card" class="flex items-center space-x-2 cursor-pointer">
-                <Icon icon="radix-icons:credit-card" class="w-5 h-5" />
+              <label for="card" class="flex items-center space-x-2 cursor-pointer text-gray-900 dark:text-white">
+                <Icon icon="radix-icons:credit-card" class="w-5 h-5 text-gray-600 dark:text-gray-400" />
                 <span>Credit/Debit Card</span>
               </label>
             </div>
@@ -155,10 +155,10 @@
                 v-model="form.paymentMethod"
                 type="radio"
                 value="cash"
-                class="w-4 h-4 text-orange-500 focus:ring-orange-500"
+                class="w-4 h-4 text-orange-500 focus:ring-orange-500 border-gray-300 dark:border-gray-600"
               />
-              <label for="cash" class="flex items-center space-x-2 cursor-pointer">
-                <Icon icon="radix-icons:coin" class="w-5 h-5" />
+              <label for="cash" class="flex items-center space-x-2 cursor-pointer text-gray-900 dark:text-white">
+                <Icon icon="radix-icons:coin" class="w-5 h-5 text-gray-600 dark:text-gray-400" />
                 <span>Cash on Delivery</span>
               </label>
             </div>
@@ -174,7 +174,7 @@
                 v-model="form.cardNumber"
                 type="text"
                 placeholder="1234 5678 9012 3456"
-                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
             </div>
             
@@ -187,7 +187,7 @@
                   v-model="form.expiryDate"
                   type="text"
                   placeholder="MM/YY"
-                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
               
@@ -199,7 +199,7 @@
                   v-model="form.cvv"
                   type="text"
                   placeholder="123"
-                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -216,7 +216,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, defineEmits } from 'vue'
+import { reactive } from 'vue'
 import { Icon } from '@iconify/vue'
 import CheckoutSummary from '../checkout/CheckoutSummary.vue'
 import type { Order, CustomerInfo } from '../../types'
@@ -257,8 +257,8 @@ const handleSubmit = () => {
   // Create order
   const order: Order = {
     id: `order-${Date.now()}`,
-    pizzas: [],
-    totalAmount: 0,
+    pizzas: [], // This would come from the cart store
+    totalAmount: 0, // This would be calculated
     customerInfo,
     status: 'pending',
     createdAt: new Date()
