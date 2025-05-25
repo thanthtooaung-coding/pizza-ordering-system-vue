@@ -41,7 +41,9 @@
             </div>
             <div class="flex justify-between">
               <span class="text-gray-600 dark:text-gray-300">Total:</span>
-              <span class="font-bold text-orange-500">${{ order.totalAmount.toFixed(2) }}</span>
+              <span class="font-bold text-orange-500">
+                ${{ (order?.totalAmount ?? 0).toFixed(2) }}
+              </span>
             </div>
           </div>
         </div>
